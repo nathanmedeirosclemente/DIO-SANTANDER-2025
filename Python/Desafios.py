@@ -1,21 +1,28 @@
-# Dicionário para agrupar participantes por tema
-eventos = {}
+def processar_reservas():
+    # Entrada dos quartos disponíveis
+    quartos_disponiveis = set(map(int, input().split()))
 
-# Entrada do número de participantes
-n = int(input().strip())
+    # Entrada das reservas solicitadas
+    reservas_solicitadas = list(map(int, input().split()))
 
-# TODO: Crie um loop para armazenar participantes e seus temas:
+    confirmadas = []
+    recusadas = []
+    disponiveis = set(quartos_disponiveis)
+    for reserva in reservas_solicitadas:
+        if reserva in disponiveis:
+            confirmadas.append(reserva)
+            disponiveis.remove(reserva)
+        else:
+            recusadas.append(reserva)
+    if confirmadas:
+        print("Reservas confirmadas:", " ".join(str(q) for q in confirmadas))
+    else:
+        print("Reservas confirmadas:")
+    if recusadas:
+        print("Reservas recusadas:", " ".join(str(q) for q in recusadas))
+    else:
+        print("Reservas recusadas:")
 
 
-# Loop para armazenar participantes e seus temas
-for _ in range(n):
-    entrada = input().strip()
-    participante, tema = [x.strip() for x in entrada.split(",")]
-    if tema not in eventos:
-        eventos[tema] = []
-    eventos[tema].append(participante)
-
-
-# Exibe os grupos organizados
-for tema, participantes in eventos.items():
-    print(f"{tema}: {', '.join(participantes)}")
+# Chamada da função principal
+processar_reservas()
