@@ -1,27 +1,21 @@
-# Entrada do usuário
-email = input().strip()
+# Dicionário para agrupar participantes por tema
+eventos = {}
 
-# TODO: Verifique as regras do e-mail:
+# Entrada do número de participantes
+n = int(input().strip())
 
-
-def validar_email(email):
-    # Não pode conter espaços
-    if " " in email:
-        return "E-mail inválido"
-    # Deve conter exatamente um @
-    if email.count("@") != 1:
-        return "E-mail inválido"
-    # Não pode começar ou terminar com @
-    if email.startswith("@") or email.endswith("@"):
-        return "E-mail inválido"
-    # Deve conter um domínio após o @
-    usuario, dominio = email.split("@")
-    if not usuario or not dominio:
-        return "E-mail inválido"
-    # Domínio deve conter pelo menos um ponto
-    if "." not in dominio:
-        return "E-mail inválido"
-    return "E-mail válido"
+# TODO: Crie um loop para armazenar participantes e seus temas:
 
 
-print(validar_email(email))
+# Loop para armazenar participantes e seus temas
+for _ in range(n):
+    entrada = input().strip()
+    participante, tema = [x.strip() for x in entrada.split(",")]
+    if tema not in eventos:
+        eventos[tema] = []
+    eventos[tema].append(participante)
+
+
+# Exibe os grupos organizados
+for tema, participantes in eventos.items():
+    print(f"{tema}: {', '.join(participantes)}")
